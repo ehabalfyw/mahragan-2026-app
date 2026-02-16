@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
+<key>NSPhotoLibraryUsageDescription</key>
+	<string>We need access to your photo library to upload images for the event</string>
+	<key>NSCameraUsageDescription</key>
+	<string>We need access to your camera to take photos for the event</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>We need access to save photos to your library</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>We need access to your microphone for recording</string>
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
