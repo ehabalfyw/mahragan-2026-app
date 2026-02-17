@@ -595,7 +595,7 @@ if (basePage == '2026.php'|| basePage == 'view.php') {
     }
 
     _controller.loadRequest(Uri.parse(
-        widget.initialUrl ?? "https://mahragan2026.ngrok.app/2026.php"));
+        widget.initialUrl ?? "https://www.google.com"));
   }
 
   Widget _buildNavItem({
