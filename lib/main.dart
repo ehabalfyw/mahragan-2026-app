@@ -776,6 +776,24 @@ if (basePage == '2026.php'|| basePage == 'view.php') {
               child: Stack(
                 children: [
                   WebViewWidget(controller: _controller),
+                  if (!_isLoading && _currentUrl.isEmpty)
+  Container(
+    color: Colors.red.withOpacity(0.9),
+    child: Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Icon(Icons.error, color: Colors.white, size: 64),
+          SizedBox(height: 16),
+          Text('WebView failed to load',
+            style: TextStyle(color: Colors.white, fontSize: 18)),
+          SizedBox(height: 8),
+          Text('URL: ${widget.initialUrl ?? "https://mahragan2026.ngrok.app/2026.php"}',
+            style: TextStyle(color: Colors.white70, fontSize: 12)),
+        ],
+      ),
+    ),
+  ),
                   if (_isLoading)
                     Container(
                       color: Colors.white.withOpacity(0.9),
