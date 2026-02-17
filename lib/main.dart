@@ -8,7 +8,7 @@ import 'firebase_handler.dart';
 import 'app_state.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:url_launcher/url_launcher.dart';
-
+import 'package:webview_flutter_wkwebview/webview_flutter_wkwebview.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
@@ -593,7 +593,10 @@ if (basePage == '2026.php'|| basePage == 'view.php') {
         return [];
       });
     }
-
+  if (_controller.platform is WebKitWebViewController) {
+  final iosController = _controller.platform as WebKitWebViewController;
+  iosController.setInspectable(true);
+}
     _controller.loadRequest(Uri.parse(
         widget.initialUrl ?? "https://mahragan2026.ngrok.app/2026.php"));
   }
