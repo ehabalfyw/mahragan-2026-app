@@ -9,11 +9,16 @@ import 'app_state.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:webview_flutter_wkwebview/webview_flutter_wkwebview.dart';
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
-  FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
-  await _setupFCM();
+  try {
+    await Firebase.initializeApp();
+    FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
+    await _setupFCM();
+  } catch (e) {
+    debugPrint("Firebase error: $e");
+  }
   runApp(const MahraganApp());
 }
 
