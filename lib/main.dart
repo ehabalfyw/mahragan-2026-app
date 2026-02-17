@@ -447,6 +447,8 @@ Future<bool> _smartGoBack() async {
     _controller = WebViewController()
       ..setJavaScriptMode(JavaScriptMode.unrestricted)
       ..setBackgroundColor(Colors.white)
+      ..enableZoom(true)
+      ..setUserAgent('Mozilla/5.0 (iPhone; CPU iPhone OS 16_0 like Mac OS X) AppleWebKit/605.1.15')
       ..setNavigationDelegate(
         NavigationDelegate(
           onPageStarted: (_) => setState(() => _isLoading = true),
@@ -557,15 +559,23 @@ if (basePage == '2026.php'|| basePage == 'view.php') {
             return NavigationDecision.navigate;
           },
           onWebResourceError: (error) {
-            if (error.description.contains('ERR_BLOCKED_BY_ORB') ||
-                error.description.contains('net::')) return;
-            if (mounted) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text("Error: ${error.description}"),
-                    backgroundColor: Colors.red[700]),
-              );
-            }
-          },
+  debugPrint("🔴 WebView Error: ${error.description}");
+  debugPrint("🔴 Error Type: ${error.errorType}");
+  debugPrint("🔴 URL: ${error.url}");
+  
+  if (error.description.contains('ERR_BLOCKED_BY_ORB') ||
+      error.description.contains('net::')) return;
+  
+  if (mounted) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text("Error: ${error.description}"),
+        backgroundColor: Colors.red[700],
+        duration: Duration(seconds: 10),
+      ),
+    );
+  }
+},
         ),
       )
       ..clearCache();
