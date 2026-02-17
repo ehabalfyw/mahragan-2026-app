@@ -19,6 +19,12 @@ Future<void> main() async {
   } catch (e) {
     debugPrint("Firebase error: $e");
   }
+  // Move this OUTSIDE try/catch to see errors
+  try {
+    await _setupFCM();
+  } catch (e) {
+    debugPrint("FCM setup error: $e");
+  }
   runApp(const MahraganApp());
 }
 
