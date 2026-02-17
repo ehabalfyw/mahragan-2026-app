@@ -24,7 +24,13 @@ Future<void> main() async {
 
 Future<void> _setupFCM() async {
   FirebaseMessaging messaging = FirebaseMessaging.instance;
-  NotificationSettings settings = await messaging.requestPermission();
+  debugPrint("🔔 Requesting permission...");
+  NotificationSettings settings = await messaging.requestPermission(
+    alert: true,
+    badge: true,
+    sound: true,
+    provisional: false,
+  );
   debugPrint("🔔 Permission: ${settings.authorizationStatus}");
   String? token = await messaging.getToken();
   debugPrint("📱 FCM Token: $token");
@@ -38,7 +44,6 @@ Future<void> _setupFCM() async {
       await FirebaseMessaging.instance.getInitialMessage();
   if (initialMessage != null) handleNotificationNavigation(initialMessage);
 }
-
 class MahraganApp extends StatelessWidget {
   const MahraganApp({super.key});
 
