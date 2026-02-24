@@ -2,28 +2,36 @@ workflows:
   ios-release:
     name: iOS Release
     instance_type: mac_mini_m2
-
     integrations:
       app_store_connect: Codemagic
-
     environment:
-      vars:
-        APPLE_TEAM_ID: FYD9X9JB25
-        AUTOMATIC_CODE_SIGNING: true
-
       ios_signing:
         distribution_type: app_store
         bundle_identifier: com.mahragan.keraza
-
     scripts:
+      - name: Install pods
+        script: |
+          cd ios && pod install
       - name: Flutter build
         script: |
-          flutter build ipa --release \
-            --export-options-plist=ios/export_options.plist
-
+          flutter build ios --release --no-codesign
+      - name: Archive and sign
+        script: |
+          xcodebuild -workspace ios/Runner.xcworkspace \
+            -scheme Runner \
+            -configuration Release \
+            -archivePath build/Runner.xcarchive \
+            archive \
+            CODE_SIGN_STYLE=Manual \
+            CODE_SIGN_IDENTITY="Apple Distribution" \
+            PROVISIONING_PROFILE_SPECIFIER="Mahragan AlKeraza App Store" \
+            DEVELOPMENT_TEAM=FYD9X9JB25
+          xcodebuild -exportArchive \
+            -archivePath build/Runner.xcarchive \
+            -exportOptionsPlist ios/ExportOptions.plist \
+            -exportPath build/ios/ipa
     artifacts:
       - build/ios/ipa/*.ipa
-
     publishing:
       app_store_connect:
         auth: integration
