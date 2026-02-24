@@ -9,12 +9,8 @@ workflows:
         distribution_type: app_store
         bundle_identifier: com.mahragan.keraza
     scripts:
-      - name: Install pods
-        script: |
-          cd ios && pod install
       - name: Flutter build
-        script: |
-          flutter build ios --release --no-codesign
+        script: flutter build ios --release --no-codesign
       - name: Archive and sign
         script: |
           xcodebuild -workspace ios/Runner.xcworkspace \
