@@ -12,7 +12,7 @@ workflows:
       - name: Flutter build
         script: |
           flutter build ipa --release \
-            --export-options-plist=/Users/builder/export_options.plist
+            --export-options-plist=ios/export_options.plist
     artifacts:
       - build/ios/ipa/*.ipa
     publishing:
