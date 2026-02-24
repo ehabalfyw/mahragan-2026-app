@@ -5,7 +5,6 @@ workflows:
 
     integrations:
       app_store_connect: Codemagic
-      developer_portal: Developer Portal
 
     environment:
       vars:
