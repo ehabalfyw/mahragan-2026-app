@@ -7,6 +7,7 @@ workflows:
     environment:
       ios_signing:
         distribution_type: app_store
+        provisioning_profile: Mahragan_AppStore
         bundle_identifier: com.mahragan.keraza
     scripts:
       - name: Flutter build
