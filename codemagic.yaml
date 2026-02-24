@@ -2,19 +2,27 @@ workflows:
   ios-release:
     name: iOS Release
     instance_type: mac_mini_m2
+
     integrations:
       app_store_connect: Codemagic
+      developer_portal: Developer Portal   # <-- must match your integration name
+
     environment:
       ios_signing:
         distribution_type: app_store
         bundle_identifier: com.mahragan.keraza
+        apple_team_id: FYD9X9JB25
+        automatic_code_signing: true
+
     scripts:
       - name: Flutter build
         script: |
           flutter build ipa --release \
             --export-options-plist=ios/export_options.plist
+
     artifacts:
       - build/ios/ipa/*.ipa
+
     publishing:
       app_store_connect:
         auth: integration
