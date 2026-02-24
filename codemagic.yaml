@@ -1,0 +1,19 @@
+workflows:
+  ios-release:
+    name: iOS Release
+    instance_type: mac_mini_m2
+    integrations:
+      app_store_connect: L6tel_2EV_xCNtSyH8bfQS96WTJDnioZp3Fs1JyazkQ
+    environment:
+      ios_signing:
+        distribution_type: app_store
+        bundle_identifier: com.mahragan.keraza
+    scripts:
+      - name: Flutter build
+        script: flutter build ios --release --no-codesign
+    artifacts:
+      - build/ios/ipa/*.ipa
+    publishing:
+      app_store_connect:
+        auth: integration
+        submit_to_testflight: true
