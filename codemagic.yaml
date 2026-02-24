@@ -5,14 +5,16 @@ workflows:
 
     integrations:
       app_store_connect: Codemagic
-      developer_portal: Developer Portal   # <-- must match your integration name
+      developer_portal: Developer Portal
 
     environment:
+      vars:
+        APPLE_TEAM_ID: FYD9X9JB25
+        AUTOMATIC_CODE_SIGNING: true
+
       ios_signing:
         distribution_type: app_store
         bundle_identifier: com.mahragan.keraza
-        apple_team_id: FYD9X9JB25
-        automatic_code_signing: true
 
     scripts:
       - name: Flutter build
