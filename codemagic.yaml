@@ -3,7 +3,7 @@ workflows:
     name: iOS Release
     instance_type: mac_mini_m2
     integrations:
-      app_store_connect: L6tel_2EV_xCNtSyH8bfQS96WTJDnioZp3Fs1JyazkQ
+      app_store_connect: Codemagic
     environment:
       ios_signing:
         distribution_type: app_store
