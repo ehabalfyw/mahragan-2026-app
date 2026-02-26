@@ -49,9 +49,9 @@ workflows:
           storeFile=$CM_KEYSTORE_PATH
           EOF
       - name: Flutter build
-        script: flutter build apk --release
+        script: flutter build appbundle --release
     artifacts:
-      - build/app/outputs/flutter-apk/app-release.apk
+      - build/app/outputs/bundle/release/app-release.aab
     publishing:
       email:
         recipients:
