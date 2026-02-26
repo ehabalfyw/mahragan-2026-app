@@ -32,3 +32,19 @@ workflows:
       app_store_connect:
         auth: integration
         submit_to_testflight: true
+
+  android-release:
+    name: Android Release
+    instance_type: mac_mini_m2
+    environment:
+      android_signing:
+        - Mahragan_Android
+    scripts:
+      - name: Flutter build
+        script: flutter build apk --release
+    artifacts:
+      - build/app/outputs/flutter-apk/app-release.apk
+    publishing:
+      email:
+        recipients:
+          - ehabalfy.w@gmail.com
