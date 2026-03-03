@@ -13,8 +13,8 @@ val keyProperties = Properties()
 keyProperties.load(FileInputStream(keyPropertiesFile))
 
 android {
-    namespace = "com.example.church_dashboard"
-    compileSdk = flutter.compileSdkVersion
+    namespace = "com.mahraganAlkeraza.app"
+    compileSdk = 36
     ndkVersion = flutter.ndkVersion
 
     compileOptions {
@@ -28,9 +28,9 @@ android {
     }
 
     defaultConfig {
-        applicationId = "com.example.church_dashboard"
+        applicationId = "com.mahraganAlkeraza.app"
         minSdk = flutter.minSdkVersion
-        targetSdk = 33
+        targetSdk = 35
         versionCode = flutter.versionCode
         versionName = flutter.versionName
     }
