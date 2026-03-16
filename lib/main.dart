@@ -152,6 +152,8 @@ Map<String, String> get _pageParents => {
     'notification.php':                   '__role_menu__',
     'all3.php':                           '__role_menu__',
     'all3spr.php':                        '__role_menu__',
+    'Important_dates.php':                '__role_menu__',
+    'register_contact.php':               '__role_menu__',
   };
 
   // Pages whose parent depends on which role accessed them
