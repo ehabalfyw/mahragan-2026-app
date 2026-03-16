@@ -183,6 +183,8 @@ Map<String, String> get _pageParents => {
       case 'notification.php':
       case 'all3.php':
       case 'all3spr.php':
+      case 'Important_dates.php': 
+      case 'register_contact.php': 
         // If not logged in (guest via view.php) → go to view.php
         // If logged in → go to role menu (handled by __role_menu__ in static map)
         if (!_isLoggedIn) {
@@ -609,22 +611,72 @@ if (basePage == '2026.php'|| basePage == 'view.php') {
             }
             return NavigationDecision.navigate;
           },
-          onWebResourceError: (error) {
+onWebResourceError: (error) {
   debugPrint("🔴 WebView Error: ${error.description}");
-  debugPrint("🔴 Error Type: ${error.errorType}");
-  debugPrint("🔴 URL: ${error.url}");
   
-  if (error.description.contains('ERR_BLOCKED_BY_ORB') ||
-      error.description.contains('net::')) return;
+  if (error.description.contains('ERR_BLOCKED_BY_ORB')) return;
   
-  if (mounted) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text("Error: ${error.description}"),
-        backgroundColor: Colors.red[700],
-        duration: Duration(seconds: 10),
-      ),
-    );
+  // Show offline page for connection errors
+  if (error.description.contains('net::ERR_NAME_NOT_RESOLVED') ||
+      error.description.contains('net::ERR_INTERNET_DISCONNECTED') ||
+      error.description.contains('net::ERR_CONNECTION_REFUSED') ||
+      error.description.contains('net::ERR_CONNECTION_TIMED_OUT') ||
+      error.description.contains('net::')) {
+    if (mounted) {
+      setState(() => _isLoading = false);
+      _controller.loadHtmlString('''
+        <!DOCTYPE html>
+        <html>
+        <head>
+          <meta name="viewport" content="width=device-width, initial-scale=1.0">
+          <style>
+            body { 
+              font-family: Arial, sans-serif; 
+              background: linear-gradient(135deg, #670d10, #092756);
+              min-height: 100vh;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              margin: 0;
+            }
+            .card {
+              background: white;
+              border-radius: 20px;
+              padding: 40px 30px;
+              text-align: center;
+              max-width: 320px;
+              width: 90%;
+              box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            }
+            .icon { font-size: 64px; margin-bottom: 20px; }
+            h2 { color: #670d10; margin-bottom: 10px; }
+            p { color: #666; font-size: 14px; margin-bottom: 25px; }
+            button {
+              background: linear-gradient(135deg, #670d10, #092756);
+              color: white;
+              border: none;
+              padding: 14px 30px;
+              border-radius: 12px;
+              font-size: 16px;
+              font-weight: bold;
+              cursor: pointer;
+              width: 100%;
+            }
+          </style>
+        </head>
+        <body>
+          <div class="card">
+            <div class="icon">📡</div>
+            <h2>Server Unavailable</h2>
+            <p>The Mahragan server is currently unreachable. Please check your internet connection and try again.</p>
+            <button onclick="window.location.href='https://mahragan2026.ngrok.app/2026.php'">
+              🔄 Try Again
+            </button>
+          </div>
+        </body>
+        </html>
+      ''');
+    }
   }
 },
         ),

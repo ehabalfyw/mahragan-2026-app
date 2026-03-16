@@ -21,7 +21,7 @@ class Church {
 
 
 Future<List<Church>> fetchChurches() async {
-  final url = Uri.parse('https://mahragan.ngrok.app/api/churches.php');
+  final url = Uri.parse('https://mahragan2026.ngrok.app/api/churches.php');
   final response = await http.get(url);
 
   if (response.statusCode == 200) {

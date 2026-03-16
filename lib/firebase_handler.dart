@@ -13,7 +13,7 @@ Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
 
 void handleNotificationNavigation(RemoteMessage message) {
   final logged = message.data['logged'];
-  final String targetUrl = "https://mahragan.ngrok.app/notification.php";
+  final String targetUrl = "https://mahragan2026.ngrok.app/notification.php";
 
   if (!isUserLoggedIn && logged == "1") {
     pendingUrlAfterLogin = targetUrl;
@@ -22,13 +22,13 @@ void handleNotificationNavigation(RemoteMessage message) {
       navigatorKey.currentState?.push(
         MaterialPageRoute(
           builder: (_) => const WebViewPage(
-            initialUrl: "https://mahragan.ngrok.app/mahragan2026.php",
+            initialUrl: "https://mahragan2026.ngrok.app/2026.php",
           ),
         ),
       );
     } else {
       globalWebViewController!.loadRequest(
-        Uri.parse("https://mahragan.ngrok.app/mahragan2026.php"),
+        Uri.parse("https://mahragan2026.ngrok.app/2026.php"),
       );
     }
     return;
@@ -43,13 +43,13 @@ void handleNotificationNavigation(RemoteMessage message) {
     navigatorKey.currentState?.push(
       MaterialPageRoute(
         builder: (_) => const WebViewPage(
-          initialUrl: "https://mahragan.ngrok.app/mahragan2026.php",
+          initialUrl: "https://mahragan2026.ngrok.app/2026.php",
         ),
       ),
     );
   } else {
     globalWebViewController!.loadRequest(
-      Uri.parse("https://mahragan.ngrok.app/mahragan2026.php"),
+      Uri.parse("https://mahragan2026.ngrok.app/2026.php"),
     );
   }
 }

@@ -1,8 +1,3 @@
-package com.example.church_dashboard
-
-import io.flutter.embedding.android.FlutterActivity
-
+package com.mahraganAlkeraza.app
 import io.flutter.embedding.android.FlutterFragmentActivity
-
 class MainActivity: FlutterFragmentActivity()
-
